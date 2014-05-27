@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>SpringDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpringDispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+   <!-- <servlet>
+        <servlet-name>hsql</servlet-name>
+        <servlet-class>org.hsqldb.server.Servlet</servlet-class>
+        &lt;!&ndash; Example of absolute DB path, for path relative ./WEB_INF add parameter hsqldb.server.use_web-inf_path = true &ndash;&gt;
+        <init-param>
+            <param-name>hsqldb.server.database</param-name>
+            <param-value>/var/db/hsql01</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hsql</servlet-name>
+        <url-pattern>*</url-pattern>
+    </servlet-mapping>-->
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>
