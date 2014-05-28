@@ -50,13 +50,10 @@ public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
     @Override
     public void save(Phone phone) {
         getHibernateTemplate().save(phone);
-
-        System.out.println("asdasd");
-
     }
 
     @Override
     public List<Phone> getAll() {
-        return null;
+        return getHibernateTemplate().loadAll(Phone.class);
     }
 }

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -12,8 +13,16 @@
 </head>
 <body>
   asdasfgasdgasdgasg
-  ${phone.name}
+  ${phones}
+  <c:forEach items="${phones}" var="phone">
+  <br/>
+      <c:out value="${phone.name}"/>
+      <br/>
+      <c:out value="${phone.phone}"/>
+  </c:forEach>
+  <%--${phone.name}
   <br>
-  ${phone.phone}
+  ${phone.phone}--%>
+
 </body>
 </html>

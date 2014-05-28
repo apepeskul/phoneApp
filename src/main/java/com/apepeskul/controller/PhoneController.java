@@ -18,12 +18,13 @@ public class PhoneController {
     @Autowired
     PhoneDao mPhoneDao;
 
-@RequestMapping (value = "/phone")
+@RequestMapping (value = "/home")
 public String hello(Model model){
 
-    Phone phone = new Phone("Alex", "095-222-31-20");
+   /* Phone phone = new Phone("Alex", "095-222-31-20");
     mPhoneDao.save(phone);
-    model.addAttribute("phone", phone);
+    model.addAttribute("phone", phone);*/
+    model.addAttribute("phones", mPhoneDao.getAll());
 return "phone";
 }
 
