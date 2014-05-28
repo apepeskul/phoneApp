@@ -1,14 +1,12 @@
 package com.apepeskul.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by alex on 27.05.2014.
  */
 @Entity
+@Table (name = "Phone")
 public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

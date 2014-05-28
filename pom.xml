@@ -94,7 +94,7 @@
                     <artifactId>maven-jetty-plugin</artifactId>
                     <version>6.1.26</version>
                     <configuration>
-                        <webAppSourceDirectory>${basedir}\web</webAppSourceDirectory>
+                       <!-- <webAppSourceDirectory>${basedir}\web</webAppSourceDirectory>-->
                         <webApp>${basedir}/target/plone-0.0.1-SNAPSHOT.war</webApp>
                         <contextPath>/</contextPath>
                     </configuration>

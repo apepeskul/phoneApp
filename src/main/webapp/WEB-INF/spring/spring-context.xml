@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:annotation-config/>
+    <context:component-scan base-package="com.apepeskul.dao, com.apepeskul.service"/>
+    <tx:annotation-driven/>
        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
            <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"></property>
            <property name="username" value="sa"></property>
@@ -13,11 +16,11 @@
        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
            <property name="dataSource" ref="dataSource"></property>
            <property name="annotatedPackages" value="com.apepeskul.domain"></property>
-           <property name="annotatedClasses" value="com.apepeskul.domain"></property>
+           <property name="packagesToScan" value="com.apepeskul.domain"></property>
            <property name="hibernateProperties">
 
                <props>
-                   <prop key="hibernate.hbm2ddl.auto">update</prop>
+                   <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
                    <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                    <prop key="hibernate.show_sql">true</prop>
                    <!--<prop key="hibernate.hbm2ddl.import_files">import.sql</prop>-->
@@ -25,5 +28,19 @@
                </props>
            </property>
        </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+
+
+
+
+
 
 </beans>

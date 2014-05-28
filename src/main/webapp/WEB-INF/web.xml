@@ -4,6 +4,18 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/spring-context.xml</param-value>
+
+
+    </context-param>
+
     <servlet>
         <servlet-name>SpringDispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -19,19 +31,19 @@
     </servlet-mapping>
 
 
-   <!-- <servlet>
+    <servlet>
         <servlet-name>hsql</servlet-name>
         <servlet-class>org.hsqldb.server.Servlet</servlet-class>
-        &lt;!&ndash; Example of absolute DB path, for path relative ./WEB_INF add parameter hsqldb.server.use_web-inf_path = true &ndash;&gt;
+        <!-- Example of absolute DB path, for path relative ./WEB_INF add parameter hsqldb.server.use_web-inf_path = true -->
         <init-param>
             <param-name>hsqldb.server.database</param-name>
-            <param-value>/var/db/hsql01</param-value>
+            <param-value>mem:testdb</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>hsql</servlet-name>
-        <url-pattern>*</url-pattern>
-    </servlet-mapping>-->
+        <url-pattern>/hsql</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>30</session-timeout>
