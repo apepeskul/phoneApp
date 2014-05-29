@@ -1,0 +1,26 @@
+.error {
+    font-weight: bold;
+    color: red;
+    padding: 2px 8px;
+    margin-top: 2px;
+}
+
+.span10 {
+    background-color: #eee;
+    border: 1px solid #888;
+    border-radius: 3px;
+}
+
+#tablespan {
+    margin-left: 10px;
+}
+
+.span4.well {
+    margin: auto;
+    height: 40%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}

@@ -1,1 +1,1 @@
-insert into Phone (id, name, phone) values (1, 'Alex','095-222-31-29'), (2, 'Anna','095-222-31-29'), (3, 'Bob','095-222-31-29') ;
+insert into Phone (id, firstName, lastName,  phone) values (default, 'Alex', 'Pepepskul', '095-222-31-29'), (default, 'Anna', 'Karenina', '095-222-31-29'), (default, 'Bob', 'Marley', '095-222-31-29') ;

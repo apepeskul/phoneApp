@@ -5,9 +5,9 @@ package com.apepeskul.dto;
  */
 public class PhoneDto {
 
-private String name;
+    private String name;
 
-private String phone;
+    private String phone;
 
     public PhoneDto(String name, String phone) {
         this.name = name;

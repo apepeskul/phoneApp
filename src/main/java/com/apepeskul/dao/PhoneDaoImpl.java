@@ -30,12 +30,12 @@ public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
     }
 
     @Override
-    public Phone get(int id) {
-        return null;
+    public Phone get(long id) {
+        return getHibernateTemplate().get(Phone.class, id);
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
 
     }
 
