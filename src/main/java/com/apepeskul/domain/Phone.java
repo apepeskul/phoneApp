@@ -1,10 +1,8 @@
 package com.apepeskul.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
-/**
- * Created by alex on 27.05.2014.
- */
 @Entity
 
 @Table(name = "Phone", uniqueConstraints = @UniqueConstraint(columnNames = {"firstName", "lastNAme"}))
@@ -14,10 +12,11 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @Pattern(regexp = "^[a-zA-Z ]+$")
     private String firstName;
-
+    @Pattern(regexp = "^[a-zA-Z ]+$")
     private String lastName;
+    @Pattern(regexp = "^\\d{3}-\\d{3}\\d{2}\\d{2}$")
     private String phone;
 
     public Phone() {

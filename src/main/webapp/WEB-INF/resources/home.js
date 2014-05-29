@@ -17,7 +17,7 @@ $(document).ready(function () {
             {   "sDefaultContent": "",
                 "bSortable": false,
                 "fnRender": function (o) {
-                    return '<input type="button" id="delete/' + o.aData["id"] + '" class="btn btn-danger btn-mini"  value="Delete" data-toggle="confirmation" data-href="/emp/delete/' + o.aData["id"] + '" />'
+                    return '<input type="button" id="delete/' + o.aData["id"] + '" class="btn btn-danger btn-mini"  value="Delete" data-toggle="confirmation" data-href="/phone/delete/' + o.aData["id"] + '" />'
                 }
             }
 
@@ -53,44 +53,48 @@ $('#myModal').on('hidden', function () {
 
 $(document).on("click", "[id^=editBtn]", function () {
 
- document.getElementById("editForm").reset();
- jQuery.getJSON("/phone/" + $(this).val(), function (data) {
+    document.getElementById("editForm").reset();
+    jQuery.getJSON("/phone/" + $(this).val(), function (data) {
 
- $('#myModal').modal({
- keyboard: false
- })
- $('#modalFirstName').val(data.firstName);
- $('#modalLastName').val(data.lastName);
-$('#modalPhone').val(data.phone);o
- $('#modalId').val(data.id);
+        $('#myModal').modal({
+            keyboard: false
+        })
+        $('#modalFirstName').val(data.firstName);
+        $('#modalLastName').val(data.lastName);
+        $('#modalPhone').val(data.phone);
+        $('#modalId').val(data.id);
 
 
+    });
+})
 
- });
- })
-/*
+$(document).on("click", "#addBtn", function () {
+    document.getElementById("editForm").reset();
+    $('#myModal').modal({
+        keyboard: false
+    })
+});
 
  jQuery(document).ready(function () {
  jQuery("#editForm").submit(function (e) {
  jQuery(".error").remove();
  jQuery.ajax({
- url: "/emp/update",
+ url: "/phone/save",
  context: document.body,
  type: 'post',
- data: jQuery(this).serialize()
-
+ data: $('#editForm').serialize()
  }).done(function (res) {
  if (res.status === "ERROR") {
  for (var key in res.errorsMap) {
- var err = "<span class=\"error\" id=\"" + key + "Id\">" + res.errorsMap[key] + "</span>";
+ var err = "<span class=\"error span2\" id=\"" + key + "Id\">" + res.errorsMap[key] + "</span>";
  jQuery("[name^='" + key + "']").after(err);
  }
  } else {
  jQuery("#msg").html("Form submitted");
  $('#myModal').modal('hide');
- var $empTable =
- $("#emptable").dataTable({ bRetrieve: true });
- $empTable.fnDraw();
+ var $table =
+ $("#table").dataTable({ bRetrieve: true });
+$table.fnDraw();
 
  }
  }).fail(function (data) {
@@ -98,5 +102,5 @@ $('#modalPhone').val(data.phone);o
  });
  return false;
  });
- });*/
+ });
 

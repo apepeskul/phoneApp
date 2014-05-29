@@ -36,7 +36,7 @@ public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
 
     @Override
     public void delete(long id) {
-
+        getHibernateTemplate().delete(this.get(id));
     }
 
     @Override

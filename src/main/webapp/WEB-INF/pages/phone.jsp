@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css"
       href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap-responsive.min.css"/>
 <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/examples/sticky-footer/sticky-footer.css"/>
-
+<link rel="stylesheet" type="text/css" href="../../resources/style.css">
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
@@ -19,14 +19,6 @@
         src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../../resources/DT_bootstrap.js"></script>
 <script type="text/javascript" src="../../resources/home.js"></script>
-<%--
-  Created by IntelliJ IDEA.
-  User: alex
-  Date: 28.05.2014
-  Time: 0:13
-  To change this template use File | Settings | File Templates.
---%>
-
 <html>
 <head>
     <title>Phone</title>
@@ -60,6 +52,7 @@ ${phone.phone}--%>
       </div>--%>
     <div class="row-fluid">
         <div class="span10 offset1">
+        <input type="button" class="btn btn-primary" id="addBtn" value="Add new"/>
             <div class="well well-large">
 
                 <div class="span12" id="tablespan">
@@ -105,31 +98,38 @@ ${phone.phone}--%>
                     <h4 class="modal-title" id="myModalLabel">Edit</h4>
                 </div>
                 <div class="modal-body" id="body">
-                    <div class="span2">
+                    <div class="span4">
                         <form id="editForm" class="form-horizontal">
                             <div class="control-group">
                                 <label class="control-label" for="modalId"/>
+
                                 <div class="controls">
-                                    <input type="hidden" id="modalId"/>
+                                    <input type="hidden" id="modalId" name="id"/>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="modalLastName"/>
+                                <label class="control-label" for="modalLastName">Last name: </label>
+
                                 <div class="controls">
-                                    <input type="text" id="modalLastName"/>
+                                    <input type="text" id="modalLastName" name="lastName"/>
+                                    <br/>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="modalFirstName"/>
+                                <label class="control-label" for="modalFirstName">First name: </label>
+
                                 <div class="controls">
-                                    <input type="text" id="modalFirstName"/>
+                                    <input type="text" id="modalFirstName" name="firstName"/>
                                 </div>
+                                <br/>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="modalPhone"/>
+                                <label class="control-label" for="modalPhone">Phone: </label>
+
                                 <div class="controls">
-                                    <input type="text" id="modalPhone"/>
+                                    <input type="text" id="modalPhone" name="phone"/>
                                 </div>
+                                <br/>
                             </div>
                             <div id="msg"></div>
                     </div>
@@ -137,7 +137,8 @@ ${phone.phone}--%>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"
-                            data-dismiss="modal">Close</button>
+                            data-dismiss="modal">Close
+                    </button>
                     <input type="submit" id="modalSubmit" value="Save" class="btn btn-primary"/>
                     </form>
                 </div>
@@ -147,7 +148,6 @@ ${phone.phone}--%>
     </div>
 
 </div>
-
 
 
 </body>
