@@ -47,11 +47,11 @@ public class PhoneServiceImpl implements PhoneService {
         mPhoneDao.update(dtoToDomain(phone));
     }
 
-    private Phone dtoToDomain(PhoneDto dto){
-    Phone phone= new Phone(dto.getFirstName(),dto.getLastName(),dto.getPhone());
-   if (dto.getId()!=null){
-       phone.setId(dto.getId());
-   }
+    private Phone dtoToDomain(PhoneDto dto) {
+        Phone phone = new Phone(dto.getFirstName(), dto.getLastName(), dto.getPhone());
+        if (dto.getId() != null) {
+            phone.setId(dto.getId());
+        }
         return phone;
 
     }

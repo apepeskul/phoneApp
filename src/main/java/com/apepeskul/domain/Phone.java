@@ -25,7 +25,7 @@ public class Phone {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        }
+    }
 
     public String getFirstName() {
         return firstName;

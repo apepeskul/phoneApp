@@ -78,35 +78,33 @@ $(document).on("click", "#addBtn", function () {
     })
 });
 
- jQuery(document).ready(function () {
- jQuery("#editForm").submit(function (e) {
- jQuery(".error").remove();
- var url="phone/update";
- if ($("#modalId").val()===''){
-     url = "phone/save"
- }
- jQuery.ajax({
- url: url,
- context: document.body,
- type: 'post',
- data: $('#editForm').serialize()
- }).done(function (res) {
- if (res.status === "ERROR") {
- for (var key in res.errorsMap) {
- var err = "<span class=\"error span2\" id=\"" + key + "Id\">" + res.errorsMap[key] + "</span>";
- jQuery("[name^='" + key + "']").after(err);
- }
- } else {
- jQuery("#msg").html("Form submitted");
- $('#myModal').modal('hide');
-/*$('.error').remove();*/
- var $table =  $("#table").dataTable({ bRetrieve: true });
-$table.fnReloadAjax();
- }
- }).fail(function (data) {
- jQuery("#msg").html("<span class=\"error\">Server failed to process request</span>");
- });
- return false;
- });
- });
+jQuery(document).ready(function () {
+    jQuery("#editForm").submit(function (e) {
+        jQuery(".error").remove();
+        var url = "phone/update";
+        if ($("#modalId").val() === '') {
+            url = "phone/save"
+        }
+        jQuery.ajax({
+            url: url,
+            context: document.body,
+            type: 'post',
+            data: $('#editForm').serialize()
+        }).done(function (res) {
+            if (res.status === "ERROR") {
+                for (var key in res.errorsMap) {
+                    var err = "<label for=\"" + key + "\" class=\"error\" id=\"" + key + "Id\">" + res.errorsMap[key] + "</span>";
+                    jQuery("[name^='" + key + "']").after(err);
+                }
+            } else {
+                $('#myModal').modal('hide');
+                var $table = $("#table").dataTable({ bRetrieve: true });
+                $table.fnReloadAjax();
+            }
+        }).fail(function (data) {
+            jQuery("#msg").html("<span class=\"error\">Server failed to process request</span>");
+        });
+        return false;
+    });
+});
 

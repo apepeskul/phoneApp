@@ -34,7 +34,6 @@
     <servlet>
         <servlet-name>hsql</servlet-name>
         <servlet-class>org.hsqldb.server.Servlet</servlet-class>
-        <!-- Example of absolute DB path, for path relative ./WEB_INF add parameter hsqldb.server.use_web-inf_path = true -->
         <init-param>
             <param-name>hsqldb.server.database</param-name>
             <param-value>mem:test</param-value>

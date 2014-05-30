@@ -1,4 +1,4 @@
-package com.apepeskul.service.validator;
+package com.apepeskul.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,8 +10,8 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = { UniqueValidator.class })
-@Target({ METHOD, ANNOTATION_TYPE, FIELD })
+@Constraint(validatedBy = {UniqueValidator.class})
+@Target({METHOD, ANNOTATION_TYPE, FIELD})
 @Retention(RUNTIME)
 public @interface UniqueColumn {
     String message() default "Already exists";
@@ -20,7 +20,7 @@ public @interface UniqueColumn {
 
     Class<?> entity();
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }

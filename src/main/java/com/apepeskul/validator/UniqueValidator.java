@@ -1,4 +1,4 @@
-package com.apepeskul.service.validator;
+package com.apepeskul.validator;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.io.Serializable;
+
 @Component
 public class UniqueValidator implements ConstraintValidator<UniqueColumn, Serializable> {
     private Class<?> entityClass;
@@ -23,12 +24,10 @@ public class UniqueValidator implements ConstraintValidator<UniqueColumn, Serial
         field = unique.property();
 
     }
-    @Transactional (readOnly = true)
+
+    @Transactional(readOnly = true)
     @Override
     public boolean isValid(Serializable property, ConstraintValidatorContext constraintValidatorContext) {
-        if (property.equals("id")){
-            return true;
-        }
         Criteria crit = sessionFactory.openSession().createCriteria(entityClass);
         crit.add(Restrictions.eq(field, property));
         return crit.list().isEmpty();

@@ -3,6 +3,7 @@ package com.apepeskul.controller;
 import com.apepeskul.dao.PhoneDao;
 import com.apepeskul.dto.PhoneDto;
 import com.apepeskul.service.PhoneService;
+import com.apepeskul.validator.PhoneValidator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by alex on 28.05.2014.
- */
 @Controller
 public class PhoneController {
 
@@ -30,17 +28,13 @@ public class PhoneController {
     @Autowired
     PhoneService mPhoneService;
 
-/*
-    @Autowired (required = false)
-    UniqueValidator mUniqueValidator;
-*/
+    @Autowired
+    PhoneValidator mPhoneValidator;
 
-    @RequestMapping(value = "/home")
+
+    @RequestMapping(value = "/")
     public String hello(Model model) {
 
-   /* Phone phone = new Phone("Alex", "095-222-31-20");
-    mPhoneDao.save(phone);
-    model.addAttribute("phone", phone);*/
         model.addAttribute("phones", mPhoneDao.getAll());
         model.addAttribute("phone", new PhoneDto());
         return "phone";
@@ -71,7 +65,8 @@ public class PhoneController {
     public String savePhone(@Valid PhoneDto phone, BindingResult bindingResult) {
         JsonResponse jsonResponse = new JsonResponse();
 
-        if (!bindingResult.hasErrors()||bindingResult.hasFieldErrors("id")) {
+        mPhoneValidator.validate(phone, bindingResult);
+        if (!bindingResult.hasErrors()) {
             mPhoneService.save(phone);
         } else {
             Map<String, String> errors = new HashMap<String, String>();
@@ -89,12 +84,9 @@ public class PhoneController {
 
     @RequestMapping(value = "/phone/update", produces = {"application/json; charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
-    public String updatePhone(PhoneDto phone, BindingResult bindingResult) {
+    public String updatePhone(@Valid PhoneDto phone, BindingResult bindingResult) {
         JsonResponse jsonResponse = new JsonResponse();
-        /*ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 
-        Validator validator = factory.getValidator();
-        validator.validate(phone);*/
         if (!bindingResult.hasErrors()) {
             mPhoneService.update(phone);
         } else {
@@ -111,10 +103,6 @@ public class PhoneController {
         return gson.toJson(jsonResponse);
     }
 
-  /*  @InitBinder
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(mUniqueValidator);
-    }*/
 
     class JsonResponse {
         private String status;

@@ -9,11 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by admin on 5/28/2014.
- */
-
-
 @Repository
 public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
 
@@ -31,7 +26,7 @@ public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
 
     @Override
     public Phone get(long id) {
-        return (Phone)getSessionFactory().getCurrentSession().get(Phone.class, id);
+        return (Phone) getSessionFactory().getCurrentSession().get(Phone.class, id);
     }
 
     @Override
@@ -43,8 +38,6 @@ public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
     public void update(Phone phone) {
 
         getSessionFactory().getCurrentSession().update(phone);
-        //  mSessionFactory.getCurrentSession().update(phone);
-
     }
 
     @Override

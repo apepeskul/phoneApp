@@ -53,7 +53,8 @@ ${phone.phone}--%>
       </div>--%>
     <div class="row-fluid">
         <div class="span10 offset1">
-        <input type="button" class="btn btn-primary" id="addBtn" value="Add new"/>
+            <input type="button" class="btn btn-primary" id="addBtn" value="Add new"/>
+
             <div class="well well-large">
 
                 <div class="span12" id="tablespan">
@@ -99,7 +100,7 @@ ${phone.phone}--%>
                     <h4 class="modal-title" id="myModalLabel">Edit</h4>
                 </div>
                 <div class="modal-body" id="body">
-                    <div class="span4">
+                    <div class="span5">
                         <form id="editForm" class="form-horizontal">
                             <div class="control-group">
                                 <label class="control-label" for="modalId"/>
