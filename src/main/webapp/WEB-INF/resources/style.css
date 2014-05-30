@@ -24,3 +24,6 @@
     bottom: 0;
     right: 0;
 }
+.container-fluid {
+    margin-top : 20px;
+}

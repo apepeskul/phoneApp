@@ -54,6 +54,7 @@ $('#myModal').on('hidden', function () {
 $(document).on("click", "[id^=editBtn]", function () {
 
     document.getElementById("editForm").reset();
+    jQuery(".error").remove();
     jQuery.getJSON("/phone/" + $(this).val(), function (data) {
 
         $('#myModal').modal({
@@ -70,6 +71,8 @@ $(document).on("click", "[id^=editBtn]", function () {
 
 $(document).on("click", "#addBtn", function () {
     document.getElementById("editForm").reset();
+    jQuery(".error").remove();
+    $("#modalId").val('');
     $('#myModal').modal({
         keyboard: false
     })
@@ -78,8 +81,12 @@ $(document).on("click", "#addBtn", function () {
  jQuery(document).ready(function () {
  jQuery("#editForm").submit(function (e) {
  jQuery(".error").remove();
+ var url="phone/update";
+ if ($("#modalId").val()===''){
+     url = "phone/save"
+ }
  jQuery.ajax({
- url: "/phone/save",
+ url: url,
  context: document.body,
  type: 'post',
  data: $('#editForm').serialize()
@@ -92,10 +99,9 @@ $(document).on("click", "#addBtn", function () {
  } else {
  jQuery("#msg").html("Form submitted");
  $('#myModal').modal('hide');
- var $table =
- $("#table").dataTable({ bRetrieve: true });
-$table.fnDraw();
-
+/*$('.error').remove();*/
+ var $table =  $("#table").dataTable({ bRetrieve: true });
+$table.fnReloadAjax();
  }
  }).fail(function (data) {
  jQuery("#msg").html("<span class=\"error\">Server failed to process request</span>");

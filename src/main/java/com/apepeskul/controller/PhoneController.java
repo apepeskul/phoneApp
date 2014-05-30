@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -26,6 +29,11 @@ public class PhoneController {
     PhoneDao mPhoneDao;
     @Autowired
     PhoneService mPhoneService;
+
+/*
+    @Autowired (required = false)
+    UniqueValidator mUniqueValidator;
+*/
 
     @RequestMapping(value = "/home")
     public String hello(Model model) {
@@ -60,9 +68,10 @@ public class PhoneController {
 
     @RequestMapping(value = "/phone/save", produces = {"application/json; charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
-    public String updateEmployee(@Valid PhoneDto phone, BindingResult bindingResult) {
+    public String savePhone(@Valid PhoneDto phone, BindingResult bindingResult) {
         JsonResponse jsonResponse = new JsonResponse();
-        if (!bindingResult.hasErrors()) {
+
+        if (!bindingResult.hasErrors()||bindingResult.hasFieldErrors("id")) {
             mPhoneService.save(phone);
         } else {
             Map<String, String> errors = new HashMap<String, String>();
@@ -77,6 +86,35 @@ public class PhoneController {
         Gson gson = new Gson();
         return gson.toJson(jsonResponse);
     }
+
+    @RequestMapping(value = "/phone/update", produces = {"application/json; charset=UTF-8"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String updatePhone(PhoneDto phone, BindingResult bindingResult) {
+        JsonResponse jsonResponse = new JsonResponse();
+        /*ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+
+        Validator validator = factory.getValidator();
+        validator.validate(phone);*/
+        if (!bindingResult.hasErrors()) {
+            mPhoneService.update(phone);
+        } else {
+            Map<String, String> errors = new HashMap<String, String>();
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError fieldError : fieldErrors) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            jsonResponse.setErrorsMap(errors);
+            jsonResponse.setStatus("ERROR");
+
+        }
+        Gson gson = new Gson();
+        return gson.toJson(jsonResponse);
+    }
+
+  /*  @InitBinder
+    private void initBinder(WebDataBinder binder) {
+        binder.setValidator(mUniqueValidator);
+    }*/
 
     class JsonResponse {
         private String status;

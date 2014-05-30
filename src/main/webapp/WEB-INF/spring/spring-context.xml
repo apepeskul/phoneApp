@@ -4,7 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:annotation-config/>
-    <context:component-scan base-package="com.apepeskul.dao, com.apepeskul.service"/>
+    <context:component-scan base-package="com.apepeskul.dao, com.apepeskul.service, com.apepeskul.service.validator"/>
     <tx:annotation-driven/>
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"></property>
@@ -13,7 +13,7 @@
         <property name="url" value="jdbc:hsqldb:mem:test"></property>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
         <property name="annotatedPackages" value="com.apepeskul.domain"></property>
         <property name="packagesToScan" value="com.apepeskul.domain"></property>
@@ -23,6 +23,7 @@
                 <prop key="hibernate.hbm2ddl.auto">create</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
+
                 <!--<prop key="hibernate.hbm2ddl.import_files">import.sql</prop>-->
 
             </props>
@@ -30,12 +31,21 @@
     </bean>
 
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     <bean class="org.springframework.orm.hibernate3.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
+   <!-- <bean id="uniqueValidator" class="com.apepeskul.service.validator.UniqueValidator">
+    </bean>-->
+
+  <!--  <bean abstract="true" id="abstractValidator" class="com.apepeskul.service.validator.SessionAwareConstraintValidator">
+
+    </bean>
+    <bean id="uniqueValidator" class="com.apepeskul.service.validator.UniqueValidator" parent="abstractValidator">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>-->
 
 </beans>

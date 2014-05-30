@@ -1,7 +1,6 @@
 package com.apepeskul.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 
 @Entity
 
@@ -12,11 +11,11 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Pattern(regexp = "^[a-zA-Z ]+$")
+    //@Pattern(regexp = "^[a-zA-Z ]+$", message = "Letters and spaces allowed")
     private String firstName;
-    @Pattern(regexp = "^[a-zA-Z ]+$")
+    //@Pattern(regexp = "^[a-zA-Z ]+$", message = "Letters and spaces allowed")
     private String lastName;
-    @Pattern(regexp = "^\\d{3}-\\d{3}\\d{2}\\d{2}$")
+    //@Pattern(regexp = "^\\d{3}-\\d{3}-\\d{2}-\\d{2}$", message = "Digits with - separator allowed")
     private String phone;
 
     public Phone() {
@@ -26,7 +25,7 @@ public class Phone {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-    }
+        }
 
     public String getFirstName() {
         return firstName;
@@ -50,5 +49,13 @@ public class Phone {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

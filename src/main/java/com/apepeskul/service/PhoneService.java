@@ -13,4 +13,6 @@ public interface PhoneService {
     void delete(long id);
 
     void save(PhoneDto phone);
+
+    void update(PhoneDto phone);
 }

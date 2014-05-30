@@ -31,29 +31,29 @@ public class PhoneDaoImpl extends HibernateDaoSupport implements PhoneDao {
 
     @Override
     public Phone get(long id) {
-        return getHibernateTemplate().get(Phone.class, id);
+        return (Phone)getSessionFactory().getCurrentSession().get(Phone.class, id);
     }
 
     @Override
     public void delete(long id) {
-        getHibernateTemplate().delete(this.get(id));
+        getSessionFactory().getCurrentSession().delete(this.get(id));
     }
 
     @Override
     public void update(Phone phone) {
 
-        getHibernateTemplate().update(phone);
+        getSessionFactory().getCurrentSession().update(phone);
         //  mSessionFactory.getCurrentSession().update(phone);
 
     }
 
     @Override
     public void save(Phone phone) {
-        getHibernateTemplate().save(phone);
+        getSessionFactory().getCurrentSession().save(phone);
     }
 
     @Override
     public List<Phone> getAll() {
-        return getHibernateTemplate().loadAll(Phone.class);
+        return getSessionFactory().getCurrentSession().createCriteria(Phone.class).list();
     }
 }

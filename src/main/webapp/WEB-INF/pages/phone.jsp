@@ -19,6 +19,7 @@
         src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../../resources/DT_bootstrap.js"></script>
 <script type="text/javascript" src="../../resources/home.js"></script>
+<script type="text/javascript" src="../../resources/fnReloadAjax.js"></script>
 <html>
 <head>
     <title>Phone</title>
